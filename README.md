@@ -15,7 +15,7 @@ dependencies:
   yaml_localizations:
 ```
 
-### Add YAML asset file per language
+### Add a YAML file per language
 
 Add a YAML file per language you support in an asset `path` and describe it in your `pubspec.yaml`
 
@@ -24,6 +24,28 @@ flutter:
   assets:
     - {path}/{languageCode}.yaml
 ```
+
+##### Example YAML file
+
+```yaml
+Hi: Hi
+Text: |
+  There once was a tall man from Ealing
+  Who got on a bus to Darjeeling
+      It said on the door
+      "Please don't sit on the floor"
+  So he carefully sat on the ceiling
+Long: >
+  Wrapped text
+  will be folded
+  into a single
+  paragraph
+
+  Blank lines denote
+  paragraph breaks
+```
+
+> Tip: Yaml supports several ways of expressing strings. Use the vertical bar character to indicate that a string will span several lines. Use the greater-than character to break up long lines.
 
 ### MaterialApp
 

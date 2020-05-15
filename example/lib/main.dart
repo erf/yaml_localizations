@@ -58,15 +58,15 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             Text(
               YamlLocalizations.of(context).string('Hi'),
-              style: TextStyle(
-                fontSize: 24,
-              ),
+              style: TextStyle(fontSize: 17),
             ),
+            SizedBox(height: 12),
             Text(
               YamlLocalizations.of(context).string('Text'),
-              style: TextStyle(
-                fontSize: 15,
-              ),
+            ),
+            SizedBox(height: 12),
+            Text(
+              YamlLocalizations.of(context).string('Long'),
             ),
           ],
         ),
