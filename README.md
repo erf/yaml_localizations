@@ -53,8 +53,6 @@ Translate strings using
 YamlLocalizations.of(context).string('Hi')
 ```
 
-// TODO: add API for other types (integer, float, boolean, sequences, maps)
-
 We keep the API simple, but you can easily add an extension method `tr` to `String` like this:
 
 ```dart
