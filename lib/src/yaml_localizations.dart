@@ -55,11 +55,13 @@ class YamlLocalizations {
       Localizations.of<YamlLocalizations>(context, YamlLocalizations);
 
   // helper for getting supported language codes from YamlLocalizationsDelegate
-  bool isSupported(Locale locale) => supportedLanguageCodes.contains(locale.languageCode);
+  bool isSupported(Locale locale) =>
+      supportedLanguageCodes.contains(locale.languageCode);
 }
 
 /// [YamlLocalizationsDelegate] add this to `MaterialApp.localizationsDelegates`
-class YamlLocalizationsDelegate extends LocalizationsDelegate<YamlLocalizations> {
+class YamlLocalizationsDelegate
+    extends LocalizationsDelegate<YamlLocalizations> {
   final YamlLocalizations localization;
 
   const YamlLocalizationsDelegate(this.localization);
