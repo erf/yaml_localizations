@@ -32,7 +32,7 @@ class YamlLocalizations {
     }
     final String path = '$assetPath/$_languageCode.yaml';
     final String cvsDoc = await rootBundle.loadString(path);
-    final yaml = loadYaml(cvsDoc.trim());
+    final YamlMap yaml = loadYaml(cvsDoc.trim());
     _localizedValues[_languageCode] = yaml;
     return this;
   }
