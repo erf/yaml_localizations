@@ -75,7 +75,7 @@ Translate strings using
 YamlLocalizations.of(context).string('Hi')
 ```
 
-We keep the API simple, but you can easily add an extension method `tr` to `String` like this:
+We keep the API simple, but you can easily add an extension method to `String` like this:
 
 ```dart
 extension LocalizedString on String {

@@ -52,24 +52,16 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text('yaml_localizations'),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              YamlLocalizations.of(context).string('Hi'),
-              style: TextStyle(fontSize: 17),
-            ),
-            SizedBox(height: 12),
-            Text(
-              YamlLocalizations.of(context).string('Text'),
-            ),
-            SizedBox(height: 12),
-            Text(
-              YamlLocalizations.of(context).string('Long'),
-            ),
-          ],
-        ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(YamlLocalizations.of(context).string('Hi')),
+          SizedBox(height: 12),
+          Text(YamlLocalizations.of(context).string('Text')),
+          SizedBox(height: 12),
+          Text(YamlLocalizations.of(context).string('Long')),
+        ],
       ),
     );
   }
