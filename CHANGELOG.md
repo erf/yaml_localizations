@@ -1,3 +1,7 @@
+## [0.1.0+2] - 22 may 2020
+
+- simplify and remove danish from example
+
 ## [0.1.0+1] - 15 may 2020
 
 - Added a yaml example file to README
