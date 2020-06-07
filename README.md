@@ -2,7 +2,7 @@
 
 A minimal [YAML](https://en.wikipedia.org/wiki/YAML) localization package for Flutter.
 
-## Rationale
+## Why
 
 YAML is a human-readable, configuration file format with a minimal syntax, which allows you to represent [strings](https://yaml-multiline.info/) as key/value pairs. String can be be both unquoted, quoted and span multiple lines. Both basic and literal strings are supported. 
 
