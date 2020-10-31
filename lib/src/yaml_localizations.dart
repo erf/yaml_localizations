@@ -18,8 +18,8 @@ class YamlLocalizations {
 
   /// initialize with asset path to yaml files and a list of supported language codes
   YamlLocalizations({
-    this.assetPath,
-    this.supportedLanguageCodes,
+    @required this.assetPath,
+    @required this.supportedLanguageCodes,
   });
 
   /// first time we call load, we read the csv file and initialize translations
