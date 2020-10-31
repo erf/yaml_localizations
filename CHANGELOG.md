@@ -1,24 +1,23 @@
-## [0.1.0+5] - 28 june 2020
+## [0.2.0] - 31 october 2020
+- make constructor parameters @required
+- don't trim
+- simplify description
 
+## [0.1.0+5] - 28 june 2020
 - update README
 
 ## [0.1.0+4] - 7 june 2020
-
 - update README
 
 ## [0.1.0+3] - 23 may 2020
-
 - add rationale to README
 
 ## [0.1.0+2] - 22 may 2020
-
 - simplify and remove danish from example
 
 ## [0.1.0+1] - 15 may 2020
-
 - Added a yaml example file to README
 - Added a new string example for broken lines
 
 ## [0.1.0] - 15 may 2020
-
 - initial release
