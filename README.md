@@ -29,7 +29,7 @@ flutter:
     - {path}/{languageCode}.yaml
 ```
 
-We also support a combination of language code and country code
+We also support a combination of language and country code
 
 ```yaml
 flutter:
@@ -61,18 +61,13 @@ Long: >
 
 ### MaterialApp
 
-Add `YamlLocalizationsDelegate` to `MaterialApp` and set `supportedLocales` using language codes.
+Add `YamlLocalizationsDelegate` to `MaterialApp` and set `supportedLocales` using language/country codes.
 
 ```
 MaterialApp(
   localizationsDelegates: [
     ... // global delegates
-    YamlLocalizationsDelegate(
-      YamlLocalizations(
-        assetPath: 'yaml_translations',
-        supportedLanguageCodes: [ 'en-GB', 'en', 'nb', ],
-      ),
-    ),
+    YamlLocalizationsDelegate( 'assets/yaml_translations'),
   ],
   supportedLocales: [ Locale('en', 'GB'), Locale('en'), Locale('nb'), ],
 }

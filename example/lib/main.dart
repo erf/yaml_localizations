@@ -15,21 +15,11 @@ class MyApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
-        YamlLocalizationsDelegate(
-          YamlLocalizations(
-            assetPath: 'assets/yaml_translations',
-            supportedLanguageCodes: [
-              'en',
-              'en-US',
-              'en-GB',
-              'nb',
-            ],
-          ),
-        ),
+        YamlLocalizationsDelegate('assets/yaml_translations'),
       ],
       supportedLocales: [
-        Locale('en', 'US'),
         Locale('en', 'GB'),
+        Locale('en', 'US'),
         Locale('en'),
         Locale('nb'),
       ],

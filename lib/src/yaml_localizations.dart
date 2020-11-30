@@ -10,17 +10,11 @@ class YamlLocalizations {
   /// path to translation assets
   final String assetPath;
 
-  /// supported language codes
-  final List<String> supportedLanguageCodes;
-
   /// a hash key of language / country code used for [_translationsMap]
   String _codeKey;
 
   /// initialize with asset path to yaml files and a list of supported language codes
-  YamlLocalizations({
-    @required this.assetPath,
-    @required this.supportedLanguageCodes,
-  });
+  YamlLocalizations(this.assetPath);
 
   Future<String> loadAsset(path) async {
     try {
@@ -38,15 +32,19 @@ class YamlLocalizations {
     assert(languageCode.isNotEmpty);
 
     if (countryCode != null && countryCode.isNotEmpty) {
-      _codeKey = languageCode + '-' + countryCode;
+      _codeKey = '$languageCode-$countryCode';
     } else {
-      _codeKey = languageCode;
+      _codeKey = '$languageCode';
     }
 
-    // exists in cache
+    debugPrint('codeKey $_codeKey');
+
+    // in cache
     if (_translationMap.containsKey(_codeKey)) {
       return this;
     }
+
+    debugPrint('load $_codeKey');
 
     // try to load with with _codeKey
     // could be a combination of language / country code
@@ -59,13 +57,14 @@ class YamlLocalizations {
     // if it was a combined key, try to load with only language code
     if (_codeKey != languageCode) {
       _codeKey = languageCode;
+      debugPrint('load $_codeKey');
       final text = await loadAsset('$assetPath/$_codeKey.yaml');
       // asset file should always exist for a supportedLanguageCode
       assert(text != null);
       _translationMap[_codeKey] = loadYaml(text);
     }
 
-    assert(false, 'translation file not found for code $_codeKey');
+    assert(false, 'translation file not found for code \'$_codeKey\'');
 
     return this;
   }
@@ -84,10 +83,6 @@ class YamlLocalizations {
   /// helper for getting [YamlLocalizations] object
   static YamlLocalizations of(BuildContext context) =>
       Localizations.of<YamlLocalizations>(context, YamlLocalizations);
-
-  // helper for getting supported language codes from YamlLocalizationsDelegate
-  bool isSupported(Locale locale) =>
-      supportedLanguageCodes.contains(locale.languageCode);
 }
 
 /// [YamlLocalizationsDelegate] add this to `MaterialApp.localizationsDelegates`
@@ -95,10 +90,12 @@ class YamlLocalizationsDelegate
     extends LocalizationsDelegate<YamlLocalizations> {
   final YamlLocalizations localization;
 
-  const YamlLocalizationsDelegate(this.localization);
+  YamlLocalizationsDelegate(String path)
+      : this.localization = YamlLocalizations(path);
 
+  /// we expect all supportedLocales to have asset files
   @override
-  bool isSupported(Locale locale) => localization.isSupported(locale);
+  bool isSupported(Locale locale) => true;
 
   @override
   Future<YamlLocalizations> load(Locale locale) => localization.load(locale);
