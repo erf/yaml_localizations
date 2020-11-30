@@ -37,6 +37,14 @@ flutter:
     - {path}/{languageCode-countryCode}.yaml
 ```
 
+
+The YAML file name must match exactly the combination of language and country 
+code described in `supportedLocales`.
+
+That is `Locale('en', 'US')` must have a corresponding `assetPath/en-US.yaml`
+file.
+
+
 ##### Example YAML file
 
 ```yaml
