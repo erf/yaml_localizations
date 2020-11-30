@@ -67,9 +67,14 @@ Add `YamlLocalizationsDelegate` to `MaterialApp` and set `supportedLocales` usin
 MaterialApp(
   localizationsDelegates: [
     ... // global delegates
-    YamlLocalizationsDelegate( 'assets/yaml_translations'),
+    YamlLocalizationsDelegate('assets/yaml_translations'),
   ],
-  supportedLocales: [ Locale('en', 'GB'), Locale('en'), Locale('nb'), ],
+  supportedLocales: [
+    Locale('en', 'GB'),
+    Locale('en', 'US'),
+    Locale('en'),
+    Locale('nb'),
+  ],
 }
 
 ```
