@@ -20,12 +20,16 @@ class MyApp extends StatelessWidget {
             assetPath: 'assets/yaml_translations',
             supportedLanguageCodes: [
               'en',
+              'en-US',
+              'en-GB',
               'nb',
             ],
           ),
         ),
       ],
       supportedLocales: [
+        Locale('en', 'US'),
+        Locale('en', 'GB'),
         Locale('en'),
         Locale('nb'),
       ],

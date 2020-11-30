@@ -1,3 +1,6 @@
+## [0.3.0] - 30 november 2020
+- add support for country code e.g. en-GB
+
 ## [0.2.0] - 31 october 2020
 - make constructor parameters @required
 - don't trim

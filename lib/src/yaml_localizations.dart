@@ -2,19 +2,19 @@ import 'package:yaml/yaml.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
-/// store translations per languageCode from a Yaml file used by [YamlLocalizationsDelegate]
+/// store translations per languageCode/country from a Yaml file used by [YamlLocalizationsDelegate]
 class YamlLocalizations {
-  /// map of translations per languageCode
-  final Map<String, YamlMap> _localizedValues = {};
+  /// map of translations per language/country code hash
+  final Map<String, YamlMap> _translationMap = {};
 
-  /// path to Yaml translation asset
+  /// path to translation assets
   final String assetPath;
 
   /// supported language codes
   final List<String> supportedLanguageCodes;
 
-  /// language code of current locale, set in [load] method
-  String _languageCode;
+  /// a hash key of language / country code used for [_translationsMap]
+  String _codeKey;
 
   /// initialize with asset path to yaml files and a list of supported language codes
   YamlLocalizations({
@@ -22,31 +22,62 @@ class YamlLocalizations {
     @required this.supportedLanguageCodes,
   });
 
-  /// first time we call load, we read the csv file and initialize translations
-  /// next time we just return this
-  /// called by [YamlLocalizationsDelegate]
+  Future<String> loadAsset(path) async {
+    try {
+      return await rootBundle.loadString(path);
+    } catch (e) {}
+    return null;
+  }
+
+  /// load and cache a yaml file per language / country code
   Future<YamlLocalizations> load(Locale locale) async {
-    this._languageCode = locale.languageCode;
-    if (_localizedValues.containsKey(_languageCode)) {
+    final languageCode = locale.languageCode;
+    final countryCode = locale.countryCode;
+
+    assert(languageCode != null);
+    assert(languageCode.isNotEmpty);
+
+    if (countryCode != null && countryCode.isNotEmpty) {
+      _codeKey = languageCode + '-' + countryCode;
+    } else {
+      _codeKey = languageCode;
+    }
+
+    // exists in cache
+    if (_translationMap.containsKey(_codeKey)) {
       return this;
     }
-    final String path = '$assetPath/$_languageCode.yaml';
-    final String text = await rootBundle.loadString(path);
-    final YamlMap yaml = loadYaml(text);
-    _localizedValues[_languageCode] = yaml;
+
+    // try to load with with _codeKey
+    // could be a combination of language / country code
+    final text = await loadAsset('$assetPath/$_codeKey.yaml');
+    if (text != null) {
+      _translationMap[_codeKey] = loadYaml(text);
+      return this;
+    }
+
+    // if it was a combined key, try to load with only language code
+    if (_codeKey != languageCode) {
+      _codeKey = languageCode;
+      final text = await loadAsset('$assetPath/$_codeKey.yaml');
+      // asset file should always exist for a supportedLanguageCode
+      assert(text != null);
+      _translationMap[_codeKey] = loadYaml(text);
+    }
+
+    assert(false, 'translation file not found for code $_codeKey');
+
     return this;
   }
 
   /// get translation given a key
   String string(String key) {
-    // find translation map given current locale
-    final bool containsLocale = _localizedValues.containsKey(_languageCode);
-    assert(containsLocale, 'Missing localization for code: $_languageCode');
-    final YamlMap translations = _localizedValues[_languageCode];
-    // find translated string given translation key
-    final bool containsKey = translations.containsKey(key);
-    assert(containsKey, 'Missing localization for translation key: $key');
-    final String translatedValue = translations[key];
+    final containsLocale = _translationMap.containsKey(_codeKey);
+    assert(containsLocale, 'Missing translation for code: $_codeKey');
+    final translations = _translationMap[_codeKey];
+    final containsKey = translations.containsKey(key);
+    assert(containsKey, 'Missing localization for key: $key');
+    final translatedValue = translations[key];
     return translatedValue;
   }
 

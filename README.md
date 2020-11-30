@@ -2,7 +2,7 @@
 
 [YAML](https://en.wikipedia.org/wiki/YAML) localization for Flutter.
 
-YAML is a human-readable, configuration file format with a minimal syntax, which allows you to represent [strings](https://yaml-multiline.info/) as key/value pairs. String can be be both unquoted, quoted and span multiple lines. Both basic and literal strings are supported. 
+YAML is a human-readable, configuration file format with a minimal syntax, which allows you to represent [strings](https://yaml-multiline.info/) as key/value pairs. String can be be both unquoted, quoted and span multiple lines. Both basic and literal strings are supported.
 
 Consider [toml_localizations](https://github.com/erf/toml_localizations), which does not depend on string indentation, or [csv_localizations](https://github.com/erf/csv_localizations) if you want to support multiple languages in a single file.
 
@@ -27,6 +27,14 @@ Add a YAML file per language you support in an asset `path` and describe it in y
 flutter:
   assets:
     - {path}/{languageCode}.yaml
+```
+
+We also support a combination of language code and country code
+
+```yaml
+flutter:
+  assets:
+    - {path}/{languageCode-countryCode}.yaml
 ```
 
 ##### Example YAML file
@@ -62,11 +70,11 @@ MaterialApp(
     YamlLocalizationsDelegate(
       YamlLocalizations(
         assetPath: 'yaml_translations',
-        supportedLanguageCodes: [ 'en', 'nb', ],
+        supportedLanguageCodes: [ 'en-GB', 'en', 'nb', ],
       ),
     ),
   ],
-  supportedLocales: [ Locale('en'), Locale('nb'), ],
+  supportedLocales: [ Locale('en', 'GB'), Locale('en'), Locale('nb'), ],
 }
 
 ```
@@ -97,6 +105,7 @@ Example:
 ```
 <key>CFBundleLocalizations</key>
 <array>
+	<string>en-GB</string>
 	<string>en</string>
 	<string>nb</string>
 </array>
