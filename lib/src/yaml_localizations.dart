@@ -37,14 +37,10 @@ class YamlLocalizations {
       _codeKey = '$languageCode';
     }
 
-    debugPrint('codeKey $_codeKey');
-
     // in cache
     if (_translationMap.containsKey(_codeKey)) {
       return this;
     }
-
-    debugPrint('load $_codeKey');
 
     // try to load with with _codeKey
     // could be a combination of language / country code
@@ -57,7 +53,6 @@ class YamlLocalizations {
     // if it was a combined key, try to load with only language code
     if (_codeKey != languageCode) {
       _codeKey = languageCode;
-      debugPrint('load $_codeKey');
       final text = await loadAsset('$assetPath/$_codeKey.yaml');
       // asset file should always exist for a supportedLanguageCode
       assert(text != null);
