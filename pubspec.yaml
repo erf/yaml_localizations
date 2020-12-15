@@ -1,6 +1,6 @@
 name: yaml_localizations
-description: YAML localization Flutter built on LocalizationsDelegate.
-version: 0.3.0
+description: A minimal YAML localization package built on LocalizationsDelegate.
+version: 0.3.0+1
 homepage: https://github.com/erf/yaml_localizations
 
 environment:

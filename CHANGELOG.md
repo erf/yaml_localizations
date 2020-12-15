@@ -1,3 +1,6 @@
+## [0.3.0+1] - 15 dec 2020
+- improve description (and improve pub convention score)
+
 ## [0.3.0] - 30 november 2020
 - add support for country code e.g. en-GB
 - remove the need for supportedLanguageCodes (we expect assets for all supportedLocales)
