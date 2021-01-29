@@ -1,3 +1,6 @@
+## [0.4.0-nullsafety.0] - 29 jan 2021
+- updated yaml package and migrated to nullsafety
+
 ## [0.3.0+1] - 15 dec 2020
 - improve description (and improve pub convention score)
 
