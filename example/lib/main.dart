@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
-        YamlLocalizationsDelegate('assets/yaml_translations'),
+        YamlLocalizationsDelegate('assets/yaml_translations', DefaultAssetBundle.of(context)),
       ],
       supportedLocales: [
         Locale('en', 'GB'),
@@ -48,11 +48,11 @@ class _MyHomePageState extends State<MyHomePage> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(YamlLocalizations.of(context).string('Hi')),
+          Text(YamlLocalizations.of(context)?.string('Hi') ?? ''),
           SizedBox(height: 12),
-          Text(YamlLocalizations.of(context).string('Text')),
+          Text(YamlLocalizations.of(context)?.string('Text') ?? ''),
           SizedBox(height: 12),
-          Text(YamlLocalizations.of(context).string('Long')),
+          Text(YamlLocalizations.of(context)?.string('Long') ?? ''),
         ],
       ),
     );

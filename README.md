@@ -92,14 +92,14 @@ MaterialApp(
 Translate strings using
 
 ```dart
-YamlLocalizations.of(context).string('Hi')
+YamlLocalizations.of(context)?.string('Hi')
 ```
 
 We keep the API simple, but you can easily add an extension method to `String` like this:
 
 ```dart
 extension LocalizedString on String {
-  String tr(BuildContext context) => YamlLocalizations.of(context).string(this);
+  String tr(BuildContext context) => YamlLocalizations.of(context)!.string(this);
 }
 ```
 

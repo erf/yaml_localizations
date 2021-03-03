@@ -1,3 +1,9 @@
+## [1.0.0] - 3 march 2021
+- stable null-safe version !
+- depends on yaml ^3.0.0
+- added widget tests
+- pass optional AssetBundle (for testing)
+
 ## [0.4.0-nullsafety.0] - 29 jan 2021
 - updated yaml package and migrated to nullsafety
 
