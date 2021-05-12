@@ -1,3 +1,6 @@
+## [1.1.0] - 12 may 2021
+- update yaml -> ^3.1.0
+
 ## [1.0.0] - 3 march 2021
 - stable null-safe version !
 - depends on yaml ^3.0.0
