@@ -26,17 +26,8 @@ Add a YAML file per language you support in an asset `path` and describe it in y
 ```yaml
 flutter:
   assets:
-    - {path}/{languageCode}.yaml
+    - assets/yaml_translations/
 ```
-
-We also support a combination of language and country code
-
-```yaml
-flutter:
-  assets:
-    - {path}/{languageCode-countryCode}.yaml
-```
-
 
 The YAML file name must match exactly the combination of language and country 
 code described in `supportedLocales`.
