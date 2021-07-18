@@ -1,6 +1,6 @@
 name: yaml_localizations
 description: A minimal YAML localization package built on LocalizationsDelegate.
-version: 1.1.0+1
+version: 1.1.1
 homepage: https://github.com/erf/yaml_localizations
 
 environment:

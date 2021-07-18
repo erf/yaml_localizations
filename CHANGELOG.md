@@ -1,4 +1,4 @@
-## [1.1.0+1] - 18 july 2021
+## [1.1.1] - 18 july 2021
 - README asset path fix
 
 ## [1.1.0] - 12 may 2021
