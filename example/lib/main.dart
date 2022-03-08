@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:yaml_localizations/yaml_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       localizationsDelegates: [
-        GlobalWidgetsLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-        YamlLocalizationsDelegate('assets/yaml_translations', DefaultAssetBundle.of(context)),
+        ...GlobalMaterialLocalizations.delegates,
+        YamlLocalizationsDelegate(
+            'assets/yaml_translations', DefaultAssetBundle.of(context)),
       ],
-      supportedLocales: [
+      supportedLocales: const [
         Locale('en', 'GB'),
         Locale('en', 'US'),
         Locale('en'),
@@ -27,12 +27,14 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(),
+      home: const MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key}) : super(key: key);
+
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
@@ -42,16 +44,16 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('yaml_localizations'),
+        title: const Text('yaml_localizations'),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(YamlLocalizations.of(context)?.string('Hi') ?? ''),
-          SizedBox(height: 12),
+          const SizedBox(height: 12),
           Text(YamlLocalizations.of(context)?.string('Text') ?? ''),
-          SizedBox(height: 12),
+          const SizedBox(height: 12),
           Text(YamlLocalizations.of(context)?.string('Long') ?? ''),
         ],
       ),
