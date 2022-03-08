@@ -1,3 +1,7 @@
+## [1.2.0] - 8 mar 2022
+- fix tests by adding GlobalMaterialLocalizations.delegates
+- add flutter_lints
+
 ## [1.1.1] - 18 july 2021
 - README asset path fix
 
