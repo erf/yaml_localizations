@@ -22,30 +22,24 @@ class YamlLocalizations {
 
   /// load and cache a yaml file per language / country code
   Future<YamlLocalizations> load(Locale locale) async {
-    final languageCode = locale.languageCode;
-    final countryCode = locale.countryCode;
-
-    if (countryCode != null && countryCode.isNotEmpty) {
-      _codeKey = '$languageCode-$countryCode';
-    } else {
-      _codeKey = '$languageCode';
-    }
+    // get the key from languageCode and countryCode
+    _codeKey = locale.toLanguageTag();
 
     // in cache already
     if (_translations.containsKey(_codeKey)) {
       return this;
     }
 
-    // load combined key of languageCode and countryCode
+    // try to load combination of languageCode and countryCode
     try {
       final text = await assetBundle.loadString('$assetPath/$_codeKey.yaml');
       _translations[_codeKey] = loadYaml(text);
       return this;
     } catch (e) {}
 
-    // load only language code
-    if (_codeKey != languageCode) {
-      _codeKey = languageCode;
+    // try to load only language code
+    if (_codeKey != locale.languageCode) {
+      _codeKey = locale.languageCode;
       try {
         final text = await assetBundle.loadString('$assetPath/$_codeKey.yaml');
         _translations[_codeKey] = loadYaml(text);
