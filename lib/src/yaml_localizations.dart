@@ -2,67 +2,67 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:yaml/yaml.dart';
 
-/// store translations per languageCode/country from a Yaml file used by [YamlLocalizationsDelegate]
+/// Store translations per languageCode/country from a Yaml file used by [YamlLocalizationsDelegate].
 class YamlLocalizations {
-  /// map of translations per language/country code hash
+  /// Map of translations per language code/country key.
   final Map<String, YamlMap> _translations = {};
 
-  /// path to translation assets
+  /// Path to YAML assets file.
   final String assetPath;
 
-  /// the asset bundle
+  /// The asset bundle.
   final AssetBundle assetBundle;
 
-  /// a hash key of language / country code used for [_translationsMap]
-  late String _codeKey;
+  /// A language / country code key used to access translations.
+  late String _langTag;
 
-  /// initialize with asset path to yaml files and an optional assetBundle
+  /// Initialize with asset path to yaml files and an optional assetBundle.
   YamlLocalizations(this.assetPath, [assetBundle])
       : this.assetBundle = assetBundle ?? rootBundle;
 
-  /// load and cache a yaml file per language / country code
+  /// Load and cache a yaml file per language / country code.
   Future<YamlLocalizations> load(Locale locale) async {
     // get the key from languageCode and countryCode
-    _codeKey = locale.toLanguageTag();
+    _langTag = locale.toLanguageTag();
 
     // in cache already
-    if (_translations.containsKey(_codeKey)) {
+    if (_translations.containsKey(_langTag)) {
       return this;
     }
 
     // try to load combination of languageCode and countryCode
     try {
-      final text = await assetBundle.loadString('$assetPath/$_codeKey.yaml');
-      _translations[_codeKey] = loadYaml(text);
+      final text = await assetBundle.loadString('$assetPath/$_langTag.yaml');
+      _translations[_langTag] = loadYaml(text);
       return this;
     } catch (e) {}
 
     // try to load only language code
-    if (_codeKey != locale.languageCode) {
-      _codeKey = locale.languageCode;
+    if (_langTag != locale.languageCode) {
+      _langTag = locale.languageCode;
       try {
-        final text = await assetBundle.loadString('$assetPath/$_codeKey.yaml');
-        _translations[_codeKey] = loadYaml(text);
+        final text = await assetBundle.loadString('$assetPath/$_langTag.yaml');
+        _translations[_langTag] = loadYaml(text);
         return this;
       } catch (e) {}
     }
 
-    assert(false, 'Translation file not found for code \'$_codeKey\'');
+    assert(false, 'Translation file not found for code \'$_langTag\'');
 
     return this;
   }
 
-  /// get translation given a key
+  /// Get translated String given a [key].
   String string(String key) {
-    return _translations[_codeKey]![key];
+    return _translations[_langTag]![key];
   }
 
-  /// helper for getting [YamlLocalizations] object
+  /// Helper for getting [YamlLocalizations] object.
   static YamlLocalizations? of(BuildContext context) =>
       Localizations.of<YamlLocalizations>(context, YamlLocalizations);
 }
 
-/// [YamlLocalizationsDelegate] add this to `MaterialApp.localizationsDelegates`
+/// LocalizationsDelegate that loads translations from a Yaml file.
 class YamlLocalizationsDelegate
     extends LocalizationsDelegate<YamlLocalizations> {
   final YamlLocalizations localization;
@@ -70,14 +70,12 @@ class YamlLocalizationsDelegate
   YamlLocalizationsDelegate(String path, [AssetBundle? assetBundle])
       : this.localization = YamlLocalizations(path, assetBundle);
 
-  /// we expect all supportedLocales to have asset files
+  /// We expect all supportedLocales to have asset files for each language.
   @override
   bool isSupported(Locale locale) => true;
 
   @override
-  Future<YamlLocalizations> load(Locale locale) {
-    return localization.load(locale);
-  }
+  Future<YamlLocalizations> load(Locale locale) => localization.load(locale);
 
   @override
   bool shouldReload(YamlLocalizationsDelegate old) => false;
