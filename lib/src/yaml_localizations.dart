@@ -54,13 +54,7 @@ class YamlLocalizations {
 
   /// get translation given a key
   String string(String key) {
-    final containsLocale = _translations.containsKey(_codeKey);
-    assert(containsLocale, 'Missing translation for code: $_codeKey');
-    final map = _translations[_codeKey]!;
-    final containsKey = map.containsKey(key);
-    assert(containsKey, 'Missing localization for key: $key');
-    final translatedValue = map[key];
-    return translatedValue;
+    return _translations[_codeKey]![key];
   }
 
   /// helper for getting [YamlLocalizations] object
