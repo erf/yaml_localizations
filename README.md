@@ -2,18 +2,18 @@
 
 A minimal [YAML](https://en.wikipedia.org/wiki/YAML) localization package for Flutter.
 
-YAML is a human-readable, configuration file format with a minimal syntax, which allows you to represent [strings](https://yaml-multiline.info/) as key/value pairs. 
+YAML is a human-readable, configuration file format with a minimal syntax, which allows you to represent [strings](https://yaml-multiline.info/) as key/value pairs in addition to other types. 
 
-## Usage
+YAML is the format used by Flutter's `pubspec.yaml` file.
 
-See [example](example).
+## Install
 
-### Install
-
-Add to your `pubspec.yaml`
+Add `yaml_localizations` and `flutter_localizations` as dependencies to your `pubspec.yaml`.
 
 ```yaml
 dependencies:
+  flutter_localizations:
+    sdk: flutter
   yaml_localizations:
 ```
 
@@ -27,14 +27,50 @@ flutter:
     - assets/yaml_translations/
 ```
 
-The YAML file name must match exactly the combination of language and country 
-code described in `supportedLocales`.
+The YAML file name must match the language tag described in `supportedLocales`.
 
-That is `Locale('en', 'US')` must have a corresponding `assetPath/en-US.yaml`
-file.
+E.g. `Locale('en', 'US')` must have a corresponding `assetPath/en-US.yaml` file.
+
+### Add localizationDelegates and supportedLocales
+
+Add `YamlLocalizationsDelegate` to `MaterialApp` and set `supportedLocales` using language/country codes.
+
+```
+MaterialApp(
+  localizationsDelegates: [
+    // global delegates
+    ...GlobalMaterialLocalizations.delegates,
+    // yaml localizations
+    YamlLocalizationsDelegate('assets/yaml_translations'),
+  ],
+  supportedLocales: [
+    Locale('en', 'GB'),
+    Locale('en', 'US'),
+    Locale('en'),
+    Locale('nb'),
+  ],
+}
+
+```
+
+### Note on **iOS**
+
+Add supported languages to `ios/Runner/Info.plist` as described 
+[here](https://flutter.dev/docs/development/accessibility-and-localization/internationalization#specifying-supportedlocales).
+
+Example:
+
+```
+<key>CFBundleLocalizations</key>
+<array>
+	<string>en-GB</string>
+	<string>en</string>
+	<string>nb</string>
+</array>
+```
 
 
-##### Example YAML file
+## YAML format
 
 ```yaml
 Hi: Hi
@@ -56,26 +92,6 @@ Long: >
 
 > Tip: Yaml supports several ways of expressing strings. Use the vertical bar character to indicate that a string will span several lines. Use the greater-than character to break up long lines.
 
-### MaterialApp
-
-Add `YamlLocalizationsDelegate` to `MaterialApp` and set `supportedLocales` using language/country codes.
-
-```
-MaterialApp(
-  localizationsDelegates: [
-    ... // global delegates
-    YamlLocalizationsDelegate('assets/yaml_translations'),
-  ],
-  supportedLocales: [
-    Locale('en', 'GB'),
-    Locale('en', 'US'),
-    Locale('en'),
-    Locale('nb'),
-  ],
-}
-
-```
-
 ### API
 
 Translate strings using
@@ -92,18 +108,13 @@ extension LocalizedString on String {
 }
 ```
 
-### Note on **iOS**
 
-Add supported languages to `ios/Runner/Info.plist` as described 
-[here](https://flutter.dev/docs/development/accessibility-and-localization/internationalization#specifying-supportedlocales).
+So you can use it like this:
 
-Example:
-
+```dart
+'Hi'.tr(context)
 ```
-<key>CFBundleLocalizations</key>
-<array>
-	<string>en-GB</string>
-	<string>en</string>
-	<string>nb</string>
-</array>
-```
+
+## Example
+
+See [example](example)
