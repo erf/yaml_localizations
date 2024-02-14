@@ -1,3 +1,6 @@
+## [1.4.0] - 6 dec 2023
+- update packages and sdk env
+
 ## [1.3.0] - 5 may 2022
 - use locale.toLanguageTag to build key
 - DOC improvements
