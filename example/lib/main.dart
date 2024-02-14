@@ -15,7 +15,8 @@ class MyApp extends StatelessWidget {
       localizationsDelegates: [
         ...GlobalMaterialLocalizations.delegates,
         YamlLocalizationsDelegate(
-            'assets/yaml_translations', DefaultAssetBundle.of(context)),
+            path: 'assets/yaml_translations',
+            assetBundle: DefaultAssetBundle.of(context)),
       ],
       supportedLocales: const [
         Locale('en', 'GB'),

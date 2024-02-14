@@ -41,7 +41,7 @@ MaterialApp(
     // global delegates
     ...GlobalMaterialLocalizations.delegates,
     // yaml localizations
-    YamlLocalizationsDelegate('assets/yaml_translations'),
+    YamlLocalizationsDelegate(path: 'assets/yaml_translations'),
   ],
   supportedLocales: [
     Locale('en', 'GB'),

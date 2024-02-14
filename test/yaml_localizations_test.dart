@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -41,8 +40,8 @@ Widget buildTestWidgetWithLocale(Locale locale) {
     locale: locale,
     localizationsDelegates: [
       YamlLocalizationsDelegate(
-        'assets/yaml_translations',
-        TestAssetBundle(),
+        path: 'assets/yaml_translations',
+        assetBundle: TestAssetBundle(),
       ),
       ...GlobalMaterialLocalizations.delegates,
     ],

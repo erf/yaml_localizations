@@ -53,9 +53,7 @@ class YamlLocalizations {
   }
 
   /// Get translated String given a [key].
-  String string(String key) {
-    return _translations[_langTag]![key];
-  }
+  String string(String key) => _translations[_langTag]![key];
 
   /// Helper for getting [YamlLocalizations] object.
   static YamlLocalizations? of(BuildContext context) =>
@@ -67,7 +65,7 @@ class YamlLocalizationsDelegate
     extends LocalizationsDelegate<YamlLocalizations> {
   final YamlLocalizations localization;
 
-  YamlLocalizationsDelegate(String path, [AssetBundle? assetBundle])
+  YamlLocalizationsDelegate({required String path, AssetBundle? assetBundle})
       : this.localization = YamlLocalizations(path, assetBundle);
 
   /// We expect all supportedLocales to have asset files for each language.
