@@ -1,3 +1,6 @@
+## [1.6.0]
+- update packages and SDK constraints
+
 ## [1.5.0]
 - update README
 - use named args for path and assetBundle
